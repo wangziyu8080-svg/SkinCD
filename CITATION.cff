@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the SkinCD paper and this repository."
+title: "SkinCD: Cross-View Layer-Contrast Decoding for Reliable Skin Disease Classification with MLLMs"
+type: software
+authors:
+  - given-names: "Zi Yu"
+    family-names: "Wang"
+  - given-names: "Xue Wu"
+    family-names: "Zhang"
+  - given-names: "Chang"
+    family-names: "Xu"
+  - given-names: "Fei"
+    family-names: "Qi"
+repository-code: "https://github.com/wangziyu8080-svg/SkinCD"
+url: "https://github.com/wangziyu8080-svg/SkinCD"
+license: Apache-2.0
+version: 1.0.0
+date-released: 2026-08-24
+keywords:
+  - multimodal large language models
+  - skin disease classification
+  - contrastive decoding
+  - medical artificial intelligence
