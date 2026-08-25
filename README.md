@@ -5,7 +5,7 @@
 
 Official implementation of **SkinCD: Cross-View Layer-Contrast Decoding for Reliable Skin Disease Classification with MLLMs**, accepted as a regular paper at **PRICAI 2026**.
 
-Authors: Zi Yu Wang, Xue Wu Zhang, Chang Xu, and Fei Qi.
+Authors: Ziyu Wang, Xuewu Zhang, Chang Xu, and Fei Qi.
 
 [[Code](https://github.com/wangziyu8080-svg/SkinCD)] · [Paper: coming soon]
 
@@ -93,7 +93,7 @@ Outputs are written to `experiments/output/`.
 If this repository is useful in your research, please cite the SkinCD paper. The final proceedings BibTeX, DOI, and page information will be added after Springer publishes the proceedings metadata. GitHub users can also select **Cite this repository** using the included `CITATION.cff` file.
 
 ```text
-Zi Yu Wang, Xue Wu Zhang, Chang Xu, and Fei Qi.
+Ziyu Wang, Xuewu Zhang, Chang Xu, and Fei Qi.
 SkinCD: Cross-View Layer-Contrast Decoding for Reliable Skin Disease
 Classification with MLLMs. PRICAI 2026. To appear.
 ```
