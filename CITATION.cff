@@ -3,9 +3,9 @@ message: "If you use this software, please cite the SkinCD paper and this reposi
 title: "SkinCD: Cross-View Layer-Contrast Decoding for Reliable Skin Disease Classification with MLLMs"
 type: software
 authors:
-  - given-names: "Zi Yu"
+  - given-names: "Ziyu"
     family-names: "Wang"
-  - given-names: "Xue Wu"
+  - given-names: "Xuewu"
     family-names: "Zhang"
   - given-names: "Chang"
     family-names: "Xu"
