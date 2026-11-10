@@ -1,10 +1,8 @@
-# Note on the Patch16 protocol (protocol footnote, plan-B draft 2026-11-07)
-
-> 这一文件对应 README §7 的第一行，是脚注的完整展开版。发布时放进 `docs/PATCH16_PROTOCOL_NOTE.md`，README 里链过去即可。三段结构：**发生了什么 → 我们怎么排查的 → 发布口径的正当性**。
+# Note on the Patch16 protocol
 
 ## 1. 发生了什么（What）
 
-The Patch16 entry of the paper's main comparison (Base 48.85 → SkinCD 66.42 Accuracy, +17.57 pp) was produced with a test list resolved at runtime from an **internal dataset registry** (`SkinRefocus/utils/dataset_registry.py`, key `patch16`). That registry file resided on the authors' compute node (`/mnt/data/ssz/...`) and was **not part of the anonymous code snapshot**, nor of this release. The snapshot only ships the resolution *calls* (`run_multidataset_dola_vola.sh`), not the *definitions*.
+The Patch16 entry of the paper's main comparison (Base 48.85 → SkinCD 66.42 Accuracy, +17.57 pp) was produced with a test list resolved at runtime from an **internal dataset registry** (`SkinRefocus/utils/dataset_registry.py`, key `patch16`). That registry file resided on a private compute node and was **not part of the code snapshot** accompanying the paper, nor of this release. The snapshot only ships the resolution *calls* (`run_multidataset_dola_vola.sh`), not the *definitions*.
 
 Consequence: the exact image list, label wording, and any subsampling behind 48.85/66.42 **cannot be reconstructed from the released materials**. We state this plainly rather than silently substituting numbers.
 
@@ -26,8 +24,8 @@ This release therefore reports Patch16 under a **fully released, hash-pinned pro
 - The mechanism story of the paper survives: the gain comes from suppressing language-prior-driven over-predictions, exactly the effect quantified on HAM10000 (Base Melanoma over-prediction 671 → 248 after SkinCD), where our reproduction matches the paper's +SkinCD accuracy to 0.14 pp.
 - The headline +17.6 pp, by contrast, is **not defensible as a mechanism effect** on any list we can access: at τ = 0.2 the method degenerates toward majority-class collapse, and 66.42% ≈ the Validation majority prior (66.44%).
 
-We recommend readers quote the released protocol numbers when citing Patch16 results, and treat the original +17.6 pp as an artifact of an unreleased list combined with τ = 0.2, pending the original registry definition.
+We recommend readers quote the released protocol numbers when citing Patch16 results. The evidence below indicates the original +17.6 pp is most consistent with a near-majority-collapse outcome of τ = 0.2 on the (unavailable) original list, rather than a mechanism gain; this assessment will be revised immediately if the original registry definition resurfaces (see §4).
 
-## 4. 若拿到 registry 后的处置（if the co-author supplies the key）
+## 4. 若拿到原始 registry 后的处置（if the original key is recovered）
 
-Replace this note with: the exact list CSV (hash-pinned), one re-run of the four arms under the paper-default config, and an updated table — either confirming §2's near-collapse diagnosis or reporting the genuine numbers under the original protocol. The investigation infrastructure (`docs/PROTOCOL_INVESTIGATION.md`, `paper_protocol_anchors_20261106/`) is retained precisely to make that re-audit cheap.
+Replace this note with: the exact list CSV (hash-pinned), one re-run of the four arms under the paper-default config, and an updated table — either confirming §2's near-collapse reading or reporting the genuine numbers under the original protocol. The investigation infrastructure (`docs/PROTOCOL_INVESTIGATION.md`) is retained precisely to make that re-audit cheap.

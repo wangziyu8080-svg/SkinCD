@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Convert SkinIR Patch16_test_sub580.csv (640 rows) to SkinCD eval format.
+"""Convert 内部 Patch16_test_sub580.csv (640 rows) to SkinCD eval format.
 
 Labels are mapped to paper-style Patch16 categories; a pathology-appropriate
 question replaces the dermoscopy question. Image column is made relative to
@@ -8,7 +8,7 @@ the tiles root so --image-root works.
 import csv
 import os
 
-SRC = "/root/experiment-models/skin/MM-Skin/third_party/anon_repos/SkinIR/Dataframe/test/classification/Patch16_test_sub580.csv"
+SRC = "/path/to/Dataframe/test/classification/Patch16_test_sub580.csv"  # adjust to your local dataset root
 TILES_ROOT = "/data/phase7/Patch16/extracted/data/tiles"
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "Patch16_test_sub640.csv")
 

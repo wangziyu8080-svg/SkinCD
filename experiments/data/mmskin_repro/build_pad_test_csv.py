@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-"""SkinIR PAD_test_isic_local.csv -> SkinCD 评测格式（question,image,categories）。
+"""PAD_test_isic_local.csv -> SkinCD 评测格式（question,image,categories）。
 
 - 源：PAD-UFES-20 测试集 2298 张（ISIC 化本地图片，全部在盘）
 - 标签空间与 SkinCD 内置 `pad` preset 完全一致（6 类）
-- image 保持相对路径（相对 SkinIR classification 目录），--image-root 指向该目录
+- image 保持相对路径（相对 classification 目录），--image-root 指向该目录
 """
 import csv
 import os
 
-SRC = "/root/experiment-models/skin/MM-Skin/third_party/anon_repos/SkinIR/Dataframe/test/classification/PAD_test_isic_local.csv"
+SRC = "/path/to/Dataframe/test/classification/PAD_test_isic_local.csv"  # adjust to your local dataset root
 IMG_ROOT = os.path.dirname(SRC)
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "PAD_test_isic_local.csv")
 

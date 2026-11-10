@@ -14,8 +14,8 @@ authors:
 repository-code: "https://github.com/wangziyu8080-svg/SkinCD"
 url: "https://github.com/wangziyu8080-svg/SkinCD"
 license: Apache-2.0
-version: 1.0.0
-date-released: 2026-08-24
+version: 1.1.0
+date-released: 2026-11-10
 keywords:
   - multimodal large language models
   - skin disease classification

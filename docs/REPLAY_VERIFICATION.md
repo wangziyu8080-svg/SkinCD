@@ -50,6 +50,8 @@ ValueError: Package mismatch: transformers expected=5.8.0 actual=4.48.3
 
 ## 3. 逐条可执行的复现步骤
 
+> 下述命令中的绝对路径为本机记录原样（`$S` 指向本仓库检出目录；`/data/phase7/...` 等为本地数据根），首次使用请按 `DATASET_PREP.md` 与 README §4 替换为自己的模型/数据路径。
+
 ### 3.1 环境变量（同一 shell）
 
 ```bash
@@ -232,7 +234,7 @@ verification.log：`Accuracy= 0.27211394302848574 Macro-F1= 0.19539187216874104 
 
 ## 6. 边界与注意事项
 
-1. 本验证是**记录口径**的复现（Patch16 Base 80.24%→83.84%，DermNet 25.46%→27.21%），**不等于论文口径**（论文 48.85%→66.42% 的 Patch16 协议未在仓库中锁定，详见 `REPRO_REPORT.md`，至今无法对上）。
+1. 本验证是**记录口径**的复现（Patch16 Base 80.24%→83.84%，DermNet 25.46%→27.21%），**不等于论文口径**（论文 48.85%→66.42% 的 Patch16 协议未在仓库中锁定，详见 `docs/PROTOCOL_INVESTIGATION.md` 与 `docs/PATCH16_PROTOCOL_NOTE.md`）。
 2. 逐位一致的前提：同机同卡（RTX 4090 D，驱动 580.95.05）、冻结源码、venv 精确版本、同 seed=55。异机/异驱动可能因浮点差异出现少量预测漂移，属预期，不代表失败。
 3. 运行显存约 16GB（模型加载 warmup 即需 ~15.5GB）；与其他训练任务共卡会 OOM。
 4. 本次没有重跑 Base（80.24% / 25.46%）；历史 Base 证据在 `patch16_repro_20261010/evidence/reference/base` 与 `dermnet_compare_20261011_123354/full_test`，如需可用 3.3/3.4 的命令去掉 `--use_cd` 段后重放。

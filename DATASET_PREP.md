@@ -7,11 +7,11 @@ This guide documents the verified data layout and commands used on this machine.
 
 Use the shared data root:
 
-        /mnt/data/ssz/Skin/skindata
+        /data/skindata
 
 Compatibility link for old scripts:
 
-        /mnt/data/ssz/Skin/SkinMR/data -> ../skindata
+        /data/SkinMR/data -> ../skindata
 
 ## Dataset Order (matching skindata directory)
 
@@ -40,8 +40,8 @@ Sources (official):
 
 Verified download commands:
 
-        mkdir -p /mnt/data/ssz/Skin/skindata/BCN20000
-        cd /mnt/data/ssz/Skin/skindata/BCN20000
+        mkdir -p /data/skindata/BCN20000
+        cd /data/skindata/BCN20000
 
         # 1) Metadata CSV
         curl -L -o bcn20000_metadata_download.csv \
@@ -116,8 +116,8 @@ Sources (official):
 
 Verified download commands:
 
-        mkdir -p /mnt/data/ssz/Skin/skindata/ISIC2019
-        cd /mnt/data/ssz/Skin/skindata/ISIC2019
+        mkdir -p /data/skindata/ISIC2019
+        cd /data/skindata/ISIC2019
 
         # 1) Metadata CSV
         curl -L -o isic2019_metadata_download.csv \
@@ -157,7 +157,7 @@ Source:
 
 Verified download commands (with gg prefix):
 
-        cd /mnt/data/ssz
+        cd /data
         mkdir -p Skin/skindata/PAD/raw Skin/skindata/PAD/images
 
         cat > /tmp/pad_mendeley_files.txt <<'EOF'

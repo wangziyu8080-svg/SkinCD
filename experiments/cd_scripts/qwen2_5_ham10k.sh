@@ -10,14 +10,14 @@ exp_dir="$(cd "${script_dir}/.." && pwd)"
 cd "${exp_dir}"
 
 seed=${1:-55}
-model_path=${2:-"/mnt/data/ssz/llms/Qwen2.5-VL-7B-Instruct"}
+model_path=${2:-"Qwen/Qwen2.5-VL-7B-Instruct"}
 cd_alpha=${3:-1}
 cd_beta=${4:-0.1}
 noise_step=${5:-500}
 cd_method=${6:-${CD_METHOD:-vcd}}
 device_map=${DEVICE_MAP:-auto}
-data_file=${HAM10K_DATA_FILE:-/mnt/data/ssz/Skin/SkinRefocus/Dataframe/test/classification/HAM10K_ISIC2018_test.csv}
-image_root=${HAM10K_IMAGE_ROOT:-/mnt/data/ssz/Skin/skindata}
+data_file=${HAM10K_DATA_FILE:-./data/csv/HAM10K_ISIC2018_test.csv}
+image_root=${HAM10K_IMAGE_ROOT:-/path/to/skindata}
 num_shards=${NUM_SHARDS:-1}
 shard_index=${SHARD_INDEX:-0}
 max_samples=${MAX_SAMPLES:-}

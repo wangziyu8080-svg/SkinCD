@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Patch16 16类子集 -> 原始类名标签版（对齐 SkinIR/SkinRefocus registry 协议）。
+"""Patch16 16类子集 -> 原始类名标签版（对齐 内部 dataset registry 协议）。
 
 与 Patch16_test16_sub2000.csv 完全相同的 1941 张图（同序），仅把标签从
 自造可读名换回协议原始名（下划线转空格、去重复实体段）：
   nontumor_skin_dermis_dermis        -> nontumor skin dermis
   nontumor_skin_muscle_skeletal      -> nontumor skin muscle skeletal
   tumor_skin_epithelial_bcc          -> tumor skin epithelial bcc
-标签空间 = SkinIR ZS_classification.py Patch16 targets 的 16 个键。
+标签空间 = 内部评测脚本 ZS_classification.py Patch16 targets 的 16 个键。
 """
 import ast
 import csv

@@ -153,13 +153,17 @@ Bit-exactness caveat: identical results were verified on the same GPU/driver (RT
 | Item | Paper | This release | Status |
 |---|---|---|---|
 | Patch16 list | internal registry (not released) | official Test 10% subsample, hash-pinned | documented in `docs/PATCH16_PROTOCOL_NOTE.md` |
-| Patch16 numbers | 48.85 → 66.42 | 80.24 → 7 83.84 (r=0.001) | protocol note |
+| Patch16 numbers | 48.85 → 66.42 | 80.24 → 83.84 (r=0.001) | protocol note |
 | HAM10000 base | 32.87 (unconstrained) | 39.81 unconstrained greedy / 37.43 sampled / 37.96 constrained seed-55 (released protocol) | split & decoding archaeology in `docs/PROTOCOL_INVESTIGATION.md` |
 | HAM10000 +SkinCD | 46.00 (unconstrained) | 57.47 constrained r=0.001 / 57.14 paper-recipe τ=0.2 | official 1,512 list ≠ paper's unreleased split; 1511-split repro 34.81 → 45.86 matches paper within 0.14 pp |
 | OPERA baseline | port included | `baselines/opera/` (ported Qwen implementation + reference results + wiring notes) |
 | Cross-model table (InternVL/LLaVA/…) | table only | entry script `experiments/eval/classification.py` + per-family adapters | partially released |
 
-## 8. License & attribution
+## Acknowledgements
+
+This repository contains integrations derived from or compatible with open-source components from Hugging Face Transformers, Qwen, LLaVA, LAVIS, visual contrastive decoding (VCD), and OPERA. Please follow the licenses and model terms of the corresponding upstream projects.
+
+## 9. License & attribution
 
 Code: Apache-2.0 (this repository). Datasets: follow their original licenses (see `DATASET_PREP.md`); no images are redistributed. Qwen2.5-VL weights follow their own license.
 

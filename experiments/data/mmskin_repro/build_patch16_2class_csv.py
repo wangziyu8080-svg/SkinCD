@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """用户提供的 Patch16 2类评测集（10% seed42 子采样，2804张）-> SkinCD 格式。
 
-- 来源：SkinIR 工作区 Patch16_2class_test_10pct_seed42.csv
+- 来源：内部工作区 Patch16_2class_test_10pct_seed42.csv
 - 标签空间：tumor / nontumor（2类，自然分布 31.6% 肿瘤）
 - 路径映射：Patch16/<cls>/<f>.jpg -> tiles/<cls>/<f>.jpg（相对 tiles 根）
 """

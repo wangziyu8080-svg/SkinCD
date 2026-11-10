@@ -8,7 +8,7 @@ backbone used in the SkinCD paper we used a faithful independent port:
   (first 10 steps, image-token aggregate attention), and rollback re-decoding.
   Paper-default parameters: scale_factor=50, threshold=15, num_attn_candidates=5,
   penalty_weights=1.0, rollback_budget=3.
-- Invoked from a SkinIR-workspace harness (`ZS_classification.py --method opera`,
+- Invoked from an internal evaluation harness (`ZS_classification.py --method opera`,
   free-generation protocol, greedy) — that harness is not part of this release;
   wiring `opera_generate_qwen()` into `experiments/eval/classification.py` is ~10 lines
   (replace the `model.generate` call), see the call signature in the module docstring.

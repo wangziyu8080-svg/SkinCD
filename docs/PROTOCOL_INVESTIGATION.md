@@ -1,23 +1,23 @@
-# SkinCD 论文 Patch16 口径调查报告（2026-11-06）
+# SkinCD Patch16 原始口径调查报告（2026-11-06）
 
-**状态：锚点实测已全部完成（截至 2026-11-06 21:00）；论文口径仍未复现，最优解释见 §4。**
+**状态：锚点实测已全部完成（截至 2026-11-06 21:00）；论文原始口径仍未复现，最优解释见 §4。**
 
 ## 0. 一眼看结论
 
 1. **论文 Patch16 主表数字（Base 48.85 / VCD 40.10 / DoLa 38.03 / SkinCD 66.42）在我们手头任何已测口径下均未复现**，六个历史口径 + 三个新协议锚点全部落空。
 2. **整数约束分析（环境无关的数学证据）**：四个数字全部在 **官方 Validation split n=12354** 上整数精确命中（§2）；全量 Test n=28039 也满足但SkinCD 值与多数类先验差 2pp。**SkinCD 66.42 ≈ val 多数类(nontumor)先验 66.44%，仅差 3 张**。
 3. **机制吻合**：test 上 vola(r=0.2) 实测坍缩为全预测 nontumor（2804/2804），acc 恰等于 test 先验 68.44%。论文 66.42 与 val 先验 66.44 的 3 张之差，与"近全坍缩"形态一致——**论文 +17.57pp 的 Patch16 增益极可能是"坍缩到多数类"在 val 自然分布上的投影**。
-4. REPLAY_VERIFICATION_20261106.md 已证明**记录口径**（80.24→83.84）可逐位复现（根因是环境漂移，恢复 venv `/data/venvs/skincd_tf580`）；本报告调查的是**论文口径**，两者不冲突。
+4. `docs/REPLAY_VERIFICATION.md` 已证明**记录口径**（80.24→83.84）可逐位复现（根因是环境漂移，恢复 venv `/data/venvs/skincd_tf580`）；本报告调查的是**原始口径**，两者不冲突。
 
 ## 1. 论文数字与已测口径对照（全部未命中）
 
 | # | 口径 | n | Base | 论文差距 | 出处 |
 |---|---|---:|---:|---|---|
-| 1 | 16类自造名·约束 | 1941 | 17.36% | −31.5pp | REPRO_REPORT 组2 |
-| 2 | 16类原始名·约束 | 1941 | 16.90% | −32.0pp | REPRO_REPORT 组2b |
-| 3 | 16类自然分布加权 | — | 20.28% | −28.6pp | REPRO_REPORT 组2 |
-| 4 | 2类折叠(16类推理) | 1941 | 63.06%* | +14.2pp | REPRO_REPORT 组2 |
-| 5 | 肿瘤4类小子集 | 160 | 27.50% | −21.4pp | REPRO_REPORT 组1 |
+| 1 | 16类自造名·约束 | 1941 | 17.36% | −31.5pp | 早期复现报告 组2 |
+| 2 | 16类原始名·约束 | 1941 | 16.90% | −32.0pp | 早期复现报告 组2b |
+| 3 | 16类自然分布加权 | — | 20.28% | −28.6pp | 早期复现报告 组2 |
+| 4 | 2类折叠(16类推理) | 1941 | 63.06%* | +14.2pp | 早期复现报告 组2 |
+| 5 | 肿瘤4类小子集 | 160 | 27.50% | −21.4pp | 早期复现报告 组1 |
 | 6 | 2类原生·约束·采样 | 2804 | 80.24% | +31.4pp | 记录口径（今天已逐位复现） |
 | 7 | 2类原生·无约束·贪心 | 2804 | 36.73% | −12.1pp | 本报告 §3 今天实测 |
 | 8 | 2类原生·无约束·采样952 | 2804 | 40.69% | −8.2pp | 本报告 §3 今天实测（冻结环境） |
@@ -44,7 +44,7 @@
 
 ## 3. 今天新增的协议锚点实测
 
-环境说明：GPU0 / RTX 4090D；前两轮用 `baseline_test`（transformers 5.12.1），第三轮起改用冻结 venv `/data/venvs/skincd_tf580`（5.8.0，与记录逐位复现同环境）。数据：官方 `Patch16_2class_test_10pct_seed42.csv`（test 2804）、`Patch16_val_2class.csv`（本日构建，val 12354 2类折叠，nontumor 66.44%）。
+环境说明：GPU0 / RTX 4090D；前两轮用临时环境（transformers 5.12.1），第三轮起改用冻结环境（5.8.0，与记录逐位复现同环境）。数据：官方 `Patch16_2class_test_10pct_seed42.csv`（test 2804）、`Patch16_val_2class.csv`（本日构建，val 12354 2类折叠，nontumor 66.44%）。
 
 | 锚点 | 协议 | 结果 | 预测分布 |
 |---|---|---:|---|
@@ -61,29 +61,26 @@
 
 ## 4. 当前证据下的最优解释
 
-论文 Patch16 主表最可能的生成方式（按置信度排序）：
+原始 Patch16 主表数字最可能的生成方式（按置信度排序）：
 
 1. **val split + 某种中间校准度的协议**（整数四连中 + SkinCD≈先验），SkinCD 臂实为"近全坍缩到多数类"；+17.57pp 是 val 自然分布下先验回贴的放大效应。与 HAM 上的真机理增益（Melanoma 先验校正）表面同向、实质不同。
 2. test 全量 28039 + 近坍缩（次选，先验差 2pp）。
-3. 完全不同的子集/prompt/评分规则（SkinRefocus registry `patch16` 键不在本仓库，无法排除）。
+3. 完全不同的子集/prompt/评分规则（SkinRefocus registry `patch16` 键定义未随论文快照发布，无法排除）。
 
-**无论 1/2/3 哪个成立，"论文 Patch16 +17.57pp"都不能按表面值引用**：同实现在同分布 test 上是我们已知的 −11.8pp（原始超参）或 +3.6pp（r=0.001 细调）。
+**无论 1/2/3 哪个成立，"原始 Patch16 +17.57pp"都不能按表面值引用**：同实现在同分布 test 上是我们已知的 −11.8pp（原始超参）或 +3.6pp（r=0.001 细调）。
 
 ## 5. 待办
 
 - [x] val 12354 + 无约束采样952（冻结环境）→ 42.08%，未命中（§3）
-- [ ] 若需继续：16类推理+2类折叠评分（val）；`max_new_tokens` / prompt 措辞变体（**用户已决定不再重跑，仅在需要时执行**）
-- [ ] 向论文作者索取 SkinRefocus registry 中 `patch16` / `patch16_2class` 键定义（唯一权威解，零 GPU 成本）
-- [x] 结论回写本报告；`REPRO_REPORT.md` 与 `SKINIR_SKINCD_ALL_RESULTS_20261011.md` §2.1 的 Patch16 行引用本报告即可
+- [ ] 若需继续：16类推理+2类折叠评分（val）；`max_new_tokens` / prompt 措辞变体（当前不再重跑，仅在需要时执行）
+- [ ] 从原始实验记录中恢复 SkinRefocus registry 中 `patch16` / `patch16_2class` 键定义（唯一权威解，零 GPU 成本）
+- [x] 结论回写本报告；发布包 README 的 Patch16 行引用本报告即可
 
 ## 6. 证据文件
 
 | 内容 | 路径 |
 |---|---|
-| 今日锚点输出 | `/tmp/ppaper/`（ham1512×2、p16 test×2、p16 val×2、指标 json、logs/） |
-| val 2类 CSV（本日构建） | `/tmp/ppaper/Patch16_val_2class.csv`（源：官方 `Patch16_val.csv` 折叠） |
-| HAM 图像软链根 | `/tmp/ham_link/` |
-| 记录口径逐位复现 | `REPLAY_VERIFICATION_20261106.md` + `replay_patch16_best_20261106_155019/`、`replay_dermnet_best_20261106_161433/` |
-| 冻结环境 venv | `/data/venvs/skincd_tf580/`（transformers 5.8.0 / torch 2.7.1） |
-
-> ⚠️ `/tmp` 重启即失；若需长期保留，应将 `/tmp/ppaper/` 归档至 `mmskin_repro/paper_protocol_anchors_20261106/`。
+| 当日锚点输出 | 内部归档 `paper_protocol_anchors_20261106/`（ham1512×2、p16 test×2、p16 val×2、指标 json、logs/；未随仓库发布） |
+| val 2类 CSV（当日构建） | 内部归档（源：官方 `Patch16_val.csv` 折叠，构建方式见 `experiments/data/mmskin_repro/`） |
+| 记录口径逐位复现 | 见 `docs/REPLAY_VERIFICATION.md` |
+| 冻结环境 | 独立 venv，版本指纹见 `environment.json`（transformers 5.8.0 / torch 2.7.1） |
